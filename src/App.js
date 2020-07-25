@@ -2,15 +2,11 @@ import React from 'react';
 import './App.css';
 
 //Import home page component
-import HomePage from "./homepage.component";
-
-//Import Scss file styling
-import './homepage.styles.scss';
+import HomePage from "./pages/homepage/homepage.component";
 
 function App() {
   return (
     <div>
-        Hallo world
         <HomePage />
     </div>
   );
