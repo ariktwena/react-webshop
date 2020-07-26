@@ -6,6 +6,10 @@ import './directory.styles.scss';
 //Import MenuItem
 import MenuItem from "../menu-item/menu-item.component";
 
+//Import fake shopping data
+import SECTIONS_DATA from "../../shopping_data/sections.data";
+import SHOP_DATA from "../../shopping_data/shop.data";
+
 //We make a class component because we need to create a state
 class Directory extends Component {
     constructor(props) {
@@ -13,44 +17,46 @@ class Directory extends Component {
 
         //We set our state value
         this.state = {
-            sections: [
-                {
-                    title: 'hats',
-                    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-                    size: '',
-                    id: 1,
-                    linkUrl: 'shop/hats'
-                },
-                {
-                    title: 'jackets',
-                    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-                    size: '',
-                    id: 2,
-                    linkUrl: 'shop/jackets'
-                },
-                {
-                    title: 'sneakers',
-                    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-                    size: '',
-                    id: 3,
-                    linkUrl: 'shop/sneakers'
-                },
-                {
-                    title: 'womens',
-                    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-                    //We give this object a size, so we can style it, if the class has the "large" class
-                    size: 'large',
-                    id: 4,
-                    linkUrl: 'shop/womens'
-                },
-                {
-                    title: 'mens',
-                    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-                    size: 'large',
-                    id: 5,
-                    linkUrl: 'shop/mens'
-                }
-            ]
+            sections: SECTIONS_DATA,
+            shop: SHOP_DATA
+            // sections: [
+            //     {
+            //         title: 'hats',
+            //         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+            //         size: '',
+            //         id: 1,
+            //         linkUrl: 'shop/hats'
+            //     },
+            //     {
+            //         title: 'jackets',
+            //         imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+            //         size: '',
+            //         id: 2,
+            //         linkUrl: 'shop/jackets'
+            //     },
+            //     {
+            //         title: 'sneakers',
+            //         imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+            //         size: '',
+            //         id: 3,
+            //         linkUrl: 'shop/sneakers'
+            //     },
+            //     {
+            //         title: 'womens',
+            //         imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+            //         //We give this object a size, so we can style it, if the class has the "large" class
+            //         size: 'large',
+            //         id: 4,
+            //         linkUrl: 'shop/womens'
+            //     },
+            //     {
+            //         title: 'mens',
+            //         imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+            //         size: 'large',
+            //         id: 5,
+            //         linkUrl: 'shop/mens'
+            //     }
+            // ]
         }
 
     }
