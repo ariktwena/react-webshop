@@ -8,7 +8,6 @@ import MenuItem from "../menu-item/menu-item.component";
 
 //Import fake shopping data
 import SECTIONS_DATA from "../../shopping_data/sections.data";
-import SHOP_DATA from "../../shopping_data/shop.data";
 
 //We make a class component because we need to create a state
 class Directory extends Component {
@@ -18,7 +17,6 @@ class Directory extends Component {
         //We set our state value
         this.state = {
             sections: SECTIONS_DATA,
-            shop: SHOP_DATA
             // sections: [
             //     {
             //         title: 'hats',
