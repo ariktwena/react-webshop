@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router'; //This is "react-router" that come
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./shop/shop.component";
 import Header from './components/header/header.component';
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 
 // const HatsPage = () => (
@@ -23,6 +24,7 @@ function App() {
         <Switch>
             <Route exact path='/' component={HomePage}/>
             <Route path='/shop' component={ShopPage}/>
+            <Route path='/signin' component={SignInAndSignUpPage}/>
             {/*<Route path='/shop/hats' component={HatsPage}/>*/}
         </Switch>
     </div>
