@@ -11,7 +11,7 @@ import Header from './components/header/header.component';
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 //Import users from Google
-import { auth } from './firebase/firebase.util';
+import { auth, createUserProfileDocument } from './firebase/firebase.util';
 
 // const HatsPage = () => (
 //     <div>
@@ -34,13 +34,40 @@ class App extends React.Component {
     //When users log in
     componentDidMount() {
         //We get the firebase change state when the users log on or off without rendering the whole page
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-            //Here we set the user, and the user will be logged in until signing out
-            this.setState({ currentUser: user });
+        this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
 
+            //Test
+            //Here we set the user, and the user will be logged in until signing out
+            // this.setState({ currentUser: user });
             //We can see the Google Auth array here
-            console.log(user);
-        })
+            // console.log(user);
+
+            //We check to see if we get userAuth from the server
+            if(userAuth){
+
+                //We create a user reference from the userAuth document, so we can set our state user data
+                const userRef = await createUserProfileDocument(userAuth);
+
+                //"onSnapshot" is like "onChange" function, that return a snapshot if the user changes
+                userRef.onSnapshot(snapShot => {
+
+                    this.setState({
+                        //we set the state to the current id, plus we import all the other attributes the user object has
+                        currentUser: {
+                            id: snapShot.id,
+                            ...snapShot.data()
+                        }
+                    //setState is Asynch, so we need a callback function to see the console.log. Else the console.log can be finished before teh state
+                    }, () => {
+                        console.log(this.state);
+                    });
+                });
+            }
+
+            //If the userAuth is null, we set it to null
+            this.setState({ currentUser: userAuth });
+
+        });
     }
 
     //When users log out we return unsubscribeFromAuth to null
