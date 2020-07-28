@@ -6,7 +6,7 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/cutom-button.component";
 
 //Sign in components
-import {auth, createUserProfileDocument, signInWithGoogle} from "../../firebase/firebase.util";
+import {auth, createUserProfileDocument } from "../../firebase/firebase.util";
 
 class SignUp extends React.Component{
     constructor(props) {

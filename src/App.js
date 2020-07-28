@@ -59,7 +59,7 @@ class App extends React.Component {
                         }
                     //setState is Asynch, so we need a callback function to see the console.log. Else the console.log can be finished before teh state
                     }, () => {
-                        console.log(this.state);
+                        // console.log(this.state); //Test
                     });
                 });
             }
