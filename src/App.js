@@ -31,9 +31,9 @@ class App extends React.Component {
     //When users are not logged in, the value is null
     unsubscribeFromAuth = null;
 
-    //When users log in
+    //When users log in or is logged in
     componentDidMount() {
-        //We get the firebase change state when the users log on or off without rendering the whole page
+        //We get the firebase change state when the users logs in, is logged in or logs off without rendering the whole page
         this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
 
             //Test

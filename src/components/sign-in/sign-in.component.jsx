@@ -45,12 +45,12 @@ class SignIn extends React.Component {
 
                     {/*Input with handleChange function. We call it handleChange in our FormInput component */}
                     {/*We incl. label in the handleChange function*/}
-                    <FormInput name='email' value={this.state.email} type='email' handleChange={this.handleChange} label='email' required />
+                    <FormInput name='email' value={this.state.email} type='email' handleChange={this.handleChange} label='Email' required />
                     {/*<label>Email</label>*/}
 
                     {/*Input with handleChange function. We call it handleChange in our FormInput component */}
                     {/*We incl. label in the handleChange function*/}
-                    <FormInput name='password' value={this.state.password} type='password' handleChange={this.handleChange} label='password' required />
+                    <FormInput name='password' value={this.state.password} type='password' handleChange={this.handleChange} label='Password' required />
                     {/*<label>Password</label>*/}
 
                     <div className='buttons'>
