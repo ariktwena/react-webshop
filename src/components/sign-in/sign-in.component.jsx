@@ -69,10 +69,16 @@ class SignIn extends React.Component {
                     {/*<label>Password</label>*/}
 
                     <div className='buttons'>
+
                         {/*"Sign In" is the children of the component*/}
                         <CustomButton type='submit' value='Sign In' > Sign in </CustomButton>
+
                         {/*Sign in with google*/}
                         <CustomButton onClick={signInWithGoogle} isGoogleSignIn > Sign in with Google </CustomButton>
+                        {/*IF USERS ARE FORCED TO WRITE EMAIL AND PASSWORD AT GOOGLE SIG IN, USE type='button'*/}
+                        {/*If you see that your sign in with google button causes the email and password fields to trigger asking the user to fill these in, simply add the property type="button" to our google sign in button!*/}
+                        {/*<CustomButton type='button' onClick={signInWithGoogle} isGoogleSignIn > Sign in with Google </CustomButton>*/}
+
                     </div>
                 </form>
             </div>
