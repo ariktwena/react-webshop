@@ -14,6 +14,12 @@ import { auth } from '../../firebase/firebase.util';
 //Import higher component for redux
 import { connect } from 'react-redux';
 
+//Shopping/cart icon
+import CartIcon from "../cart-icon/cart-icon.component";
+
+//Cart dropdown component
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
 const Header = ({ currentUser }) => (
     <div className='header'>
         <Link className='logo-container' to='/'>
@@ -34,7 +40,14 @@ const Header = ({ currentUser }) => (
                     ? <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
                     : <Link className='option' to='/signin'>SIGN IN</Link>
             }
+
+            {/*Shopping/cart icon*/}
+            <CartIcon />
         </div>
+
+        {/*We place the cart dropdown outside the options div, so it looks like it's under the cart*/}
+        <CartDropdown />
+
     </div>
 )
 
