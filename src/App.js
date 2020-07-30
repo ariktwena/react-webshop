@@ -13,6 +13,10 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 //Import users from Google
 import { auth, createUserProfileDocument } from './firebase/firebase.util';
 
+//Import higher component for redux
+import { connect } from 'react-redux';
+import { setCurrentUser } from "./redux/user/user.actions";
+
 // const HatsPage = () => (
 //     <div>
 //         HATS PAGE
@@ -20,19 +24,26 @@ import { auth, createUserProfileDocument } from './firebase/firebase.util';
 // )
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            currentUser: null,
-        }
-    }
+    //**********  Enable if are NOT using redux Global state
+    //We dont need the cogtnstructor, because we are setting the current user from the the global state
+    // constructor(props) {
+    //     super(props);
+    //
+    //     this.state = {
+    //         currentUser: null,
+    //     }
+    // }
+    //********** End
 
     //When users are not logged in, the value is null
     unsubscribeFromAuth = null;
 
     //When users log in or is logged in
     componentDidMount() {
+        //We can destructure setCurrentUser when we use setCurrentUser from our redux global state
+        const { setCurrentUser } = this.props
+
         //We get the firebase change state when the users logs in, is logged in or logs off without rendering the whole page
         this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
 
@@ -51,21 +62,38 @@ class App extends React.Component {
                 //"onSnapshot" is like "onChange" function, that return a snapshot if the user changes
                 userRef.onSnapshot(snapShot => {
 
-                    this.setState({
+                    //************* Enable if we are NOT using redux global state
+                    // this.setState({
+                    //     //we set the state to the current id, plus we import all the other attributes the user object has
+                    //     currentUser: {
+                    //         id: snapShot.id,
+                    //         ...snapShot.data()
+                    //     }
+                    // //setState is Async, so we need a callback function to see the console.log. Else the console.log can be finished before teh state
+                    // }, () => {
+                    //     // console.log(this.state); //Test
+                    // });
+                    //************ End *********************
+
+                    setCurrentUser({
                         //we set the state to the current id, plus we import all the other attributes the user object has
-                        currentUser: {
-                            id: snapShot.id,
-                            ...snapShot.data()
-                        }
-                    //setState is Asynch, so we need a callback function to see the console.log. Else the console.log can be finished before teh state
-                    }, () => {
-                        // console.log(this.state); //Test
+                        id: snapShot.id,
+                        ...snapShot.data()
+                    }, () => { //setState is Async, so we need a callback function to see the console.log. Else the console.log can be finished before teh state
+
+                        console.log(setCurrentUser); //Test
                     });
+
                 });
             }
 
+            //****** Enable if we are NOT using redux global state
+            // //If the userAuth is null, we set it to null
+            // this.setState({ currentUser: userAuth });
+            //****** End
+
             //If the userAuth is null, we set it to null
-            this.setState({ currentUser: userAuth });
+            setCurrentUser(userAuth);
 
         });
     }
@@ -93,4 +121,12 @@ class App extends React.Component {
     };
 }
 
-export default App;
+//We add the state from the global state, that is used to render
+const mapDispatchToProps = dispatch => ({
+    //We are dispatching the user object
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+
+//The App component renders currentUser from global state. This is why the first argument i null, we dont set it. Only render it
+export default connect(null, mapDispatchToProps)(App);

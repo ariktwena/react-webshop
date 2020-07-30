@@ -39,6 +39,7 @@ const Header = ({ currentUser }) => (
 )
 
 //We check our global state in our rootReducer, and look for the state of our currentUser in our userReducer
+//We take the state in the global state, at pass them trough as props
 const mapStateToProps = globalState => ({
     currentUser: globalState.userReducer.currentUser
 });
