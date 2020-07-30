@@ -11,6 +11,9 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 //Import firebase auth
 import { auth } from '../../firebase/firebase.util';
 
+//Import higher component for redux
+import { connect } from 'react-redux';
+
 const Header = ({ currentUser }) => (
     <div className='header'>
         <Link className='logo-container' to='/'>
@@ -35,4 +38,10 @@ const Header = ({ currentUser }) => (
     </div>
 )
 
-export default Header;
+//We check our global state in our rootReducer, and look for the state of our currentUser in our userReducer
+const mapStateToProps = globalState => ({
+    currentUser: globalState.userReducer.currentUser
+});
+
+//We export the Header component using the currentUser from the global state
+export default connect(mapStateToProps)(Header);

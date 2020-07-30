@@ -79,7 +79,9 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <Header currentUser={this.state.currentUser} />
+                {/*<Header currentUser={this.state.currentUser} />*/}
+                {/*We are getting the currentUser from the Header via our reducer. We dont need to pass it in any more*/}
+                <Header />
                 <Switch>
                     <Route exact path='/' component={HomePage}/>
                     <Route path='/shop' component={ShopPage}/>
