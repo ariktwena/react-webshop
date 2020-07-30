@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 //Import Router components
-import { Switch, Route } from 'react-router'; //This is "react-router" that comes with "react-router-dom" install
+import { Switch, Route, Redirect } from 'react-router'; //This is "react-router" that comes with "react-router-dom" install
 
 //Import routing page components
 import HomePage from "./pages/homepage/homepage.component";
@@ -113,13 +113,28 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path='/' component={HomePage}/>
                     <Route path='/shop' component={ShopPage}/>
-                    <Route path='/signin' component={SignInAndSignUpPage}/>
+                    {/*We redirect the user, if the user is signed in, so they can't see the login page*/}
+                    <Route exact path='/signin' render={() =>
+                        this.props.currentUser
+                        ? (<Redirect to='/' />)
+                        : (<SignInAndSignUpPage />)
+                    }/>
                     {/*<Route path='/shop/hats' component={HatsPage}/>*/}
                 </Switch>
             </div>
         )
     };
 }
+
+
+
+//For the redirect of logged in user not being abel to use the sign in page, we need the current user from our global state -> props
+//We destructure the globalState = { userReducer, reducerName2 ...}
+const mapStateToProps = ({ userReducer }) => ({
+    currentUser: userReducer.currentUser,
+})
+
+
 
 //We add the state from the global state, that is used to render
 const mapDispatchToProps = dispatch => ({
@@ -129,4 +144,6 @@ const mapDispatchToProps = dispatch => ({
 
 
 //The App component renders currentUser from global state. This is why the first argument i null, we dont set it. Only render it
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
+//We set null to our currentUser
+export default connect(mapStateToProps, mapDispatchToProps)(App);
