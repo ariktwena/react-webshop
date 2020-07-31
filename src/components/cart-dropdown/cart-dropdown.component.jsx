@@ -2,7 +2,7 @@ import React from "react";
 
 import './cart-dropdown.styles.scss';
 
-import CustomButton from "../custom-button/cutom-button.component";
+import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 
 
