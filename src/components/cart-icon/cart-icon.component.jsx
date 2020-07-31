@@ -4,8 +4,12 @@ import './cart-icon.styles.scss';
 
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 
-const CartIcon = () => (
-  <div className='cart-icon'>
+//Import redux components
+import { connect } from 'react-redux';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
+
+const CartIcon = ({ toggleCartHidden }) => (
+  <div className='cart-icon' onClick={toggleCartHidden}>
 
       {/*Shopping icon*/}
       <ShoppingIcon className='shopping-icon' />
@@ -15,4 +19,10 @@ const CartIcon = () => (
   </div>
 );
 
-export default CartIcon;
+const mapDispatchToProps = dispatch => ({
+    toggleCartHidden: () => dispatch(toggleCartHidden())
+});
+
+// export default CartIcon;
+export default connect(null, mapDispatchToProps)(CartIcon);
+
