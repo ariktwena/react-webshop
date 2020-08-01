@@ -4,24 +4,48 @@ import './collection-item.styles.scss';
 
 import CustomButton from "../custom-button/custom-button.component";
 
-const CollectionItem = ({ name, imageUrl, price }) => (
-    <div className='collection-item'>
+//Import higher component for redux
+import { connect } from 'react-redux';
+import { addItemToCart } from '../../redux/cart/cart.actions'
+import {setCurrentUser} from "../../redux/user/user.actions";
 
-        <div className='image' style={{ backgroundImage: `url(${imageUrl})`}}>
-            {/*<img src={imageUrl} alt=''/>*/}
+const CollectionItem = ({ item, addItemToCart }) => {
+
+    //We destructure item, because we need the whole "item" for the global state
+    const { name, imageUrl, price, cartItems } = item;
+
+    return (
+        <div className='collection-item'>
+
+            <div className='image' style={{backgroundImage: `url(${imageUrl})`}}>
+                {/*<img src={imageUrl} alt=''/>*/}
+            </div>
+
+            <div className='collection-footer'>
+
+                <span className='name'>{name}</span>
+                <span className='price'>{price}</span>
+
+            </div>
+
+            {/*Custom button*/}
+            <CustomButton inverted onClick={() => addItemToCart(item)}>Add to cart</CustomButton>
+
         </div>
+    )
+}
 
-        <div className='collection-footer'>
+// //ADVANCED WAY of destructuring the globalState
+// const mapStateToProps = ({ cartReducer: { cartItems } }) => ({
+//     cartItems
+// });
 
-            <span className='name'>{name}</span>
-            <span className='price'>{price}</span>
+//We add the state from the global state, that is used to render
+const mapDispatchToProps = dispatch => ({
+    //We are dispatching the user object into the addItemCart function
+    addItemToCart: cartItems => dispatch(addItemToCart(cartItems))
+});
 
-        </div>
-
-        {/*Custom button*/}
-        <CustomButton inverted>Add to cart</CustomButton>
-
-    </div>
-)
-
-export default CollectionItem;
+//We dont pass in a value for cartItem to begin with. Therefor its null
+export default connect(null, mapDispatchToProps)(CollectionItem);
+// export default CollectionItem;

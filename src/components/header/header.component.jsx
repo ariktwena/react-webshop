@@ -72,5 +72,5 @@ const mapStateToProps = globalState => ({
 //     cartHidden
 // });
 
-//We export the Header component using the currentUser from the global state
+//We export the Header component using the currentUser and cartHidden from the global state
 export default connect(mapStateToProps)(Header);

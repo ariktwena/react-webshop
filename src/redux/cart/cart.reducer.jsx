@@ -6,6 +6,7 @@ import CartActionTypes from './cart.types';
 //We define the initial state/current state
 const INITIAL_STATE = {
     cartHidden: true,
+    cartItems: []
 }
 
 
@@ -22,6 +23,15 @@ const cartReducer = (currentState = INITIAL_STATE, action) => {
                 ...currentState,
                 //We toggle the currentState. "!" means we switch to the opposite value of what the currentState is now. If true => false. If false => true.
                 cartHidden: !currentState.cartHidden
+            }
+        //When the action.type = ADD_TO_CART
+        case CartActionTypes.ADD_TO_CART:
+            return {
+                //First we import everything in the state
+                ...currentState,
+                //We want to add an item to our array, so first we pass in the existing array og cartItems (...currentState.cartItems)
+                //Then we pass in a new item in the END of that array from the payload (, action.payload)
+                cartItems: [...currentState.cartItems, action.payload]
             }
         default:
             //If no match with action.type, we just return the currentState with no changes

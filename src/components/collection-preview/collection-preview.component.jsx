@@ -16,8 +16,9 @@ const CollectionPreview = ({ title, items }) => (
                 //We filter, so we only show 4 items
                 items
                     .filter((item, index) => index < 4) //index 0, 1, 2, 3 is 4 element. currentElement = item
-                    .map(({ id, ...otherItemProps}) => ( //We destructor the items props
-                    <CollectionItem key={id} {...otherItemProps} />
+                    // .map(({ id, ...otherItemProps}) => ( //We destructor the items props
+                    .map( item  => ( //We need the "item" for the global state, so we CAN'T destructure it
+                    <CollectionItem key={item.id} item={item} />
                 ))
             }
 
