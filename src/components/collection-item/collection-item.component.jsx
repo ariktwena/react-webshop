@@ -12,7 +12,7 @@ import {setCurrentUser} from "../../redux/user/user.actions";
 const CollectionItem = ({ item, addItemToCart }) => {
 
     //We destructure item, because we need the whole "item" for the global state
-    const { name, imageUrl, price, cartItems } = item;
+    const { name, imageUrl, price } = item;
 
     return (
         <div className='collection-item'>

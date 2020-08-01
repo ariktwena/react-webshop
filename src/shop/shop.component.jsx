@@ -28,7 +28,7 @@ class ShopPage extends React.Component{
                 {
                     //Se "directory" file for pointers why we do this. Here we just first convert "state" to a const
                     //We use ...otherSectionProps to auto fill the values for the props with the exact props name
-                    collections.map( ({ id, ...otherCollectionProps}) => (<CollectionPreview key={id} {...otherCollectionProps}/>))}
+                    collections.map( ({ id, ...otherCollectionProps}) => (<CollectionPreview key={id} {...otherCollectionProps}/>))
                 }
 
             </div>
