@@ -11,7 +11,7 @@ import {connect} from "react-redux";
 const CartDropdown = ({cartItems}) => ( //IMPORTANT: we destructure the props when it comes from global state ({cartItems})
     <div className='cart-dropdown'>
 
-        <div className='cart_items'>
+        <div className='cart-items'>
 
             {
                 //We loop trough the global cartItems, and render a item for every index in the array
