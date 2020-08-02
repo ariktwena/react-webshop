@@ -3,17 +3,18 @@
 export const addItemToCartFunction = (cartItems, cartItemToAdd) => {
 
     //We loop trough the cart items "cartItems", and check every "cartItem.id" up against our "cartItemToAdd.id" to see if they match.
-    //If they do, we set our existingCartItems to the exact cartItem. Else the existingCartItems = undefined
+    //If they do, we set our existingCartItems to true. Else the existingCartItems = undefined
+    //The find() loops trough an array, and returns true, on the FIRST value that matches
     const existingCartItems = cartItems.find( cartItem => cartItem.id === cartItemToAdd.id);
 
-    //If existingCartItems exists
+    //If existingCartItems exists/true
     if(existingCartItems) {
         //we return a new array
         return cartItems.map(cartItem =>
             //If they mach like before
             cartItem.id === cartItemToAdd.id
                 //We return a new item, where we add all the old cartItem props, but set the quantity to +1
-                ? { ...cartItem, quantity: cartItem.quantity +1 }
+                ? { ...cartItem, quantity: cartItem.quantity + 1 }
                 //We they dont match, we just return the original item
                 : cartItem
         )

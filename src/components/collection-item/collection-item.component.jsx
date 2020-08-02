@@ -7,7 +7,6 @@ import CustomButton from "../custom-button/custom-button.component";
 //Import higher component for redux
 import { connect } from 'react-redux';
 import { addItemToCart } from '../../redux/cart/cart.actions'
-import {setCurrentUser} from "../../redux/user/user.actions";
 
 const CollectionItem = ({ item, addItemToCart }) => {
 
