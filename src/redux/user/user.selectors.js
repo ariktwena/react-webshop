@@ -9,24 +9,12 @@ import { createSelector } from 'reselect';
 
 
 //Input selector: A selector that takes the whole state, but only gives us part of it.
-const selectCart = state => state.cartReducer;
+const selectUser = state => state.userReducer;
 
 //Output selector where we output the value we selected
-export const selectCartHidden = createSelector(
-    [selectCart],
-    cartReducer => cartReducer.cartHidden
-)
-
-//Output selector where we output the value we selected
-export const selectCartItems = createSelector(
-    [selectCart],
-    cartReducer => cartReducer.cartItems
-)
-
-//We can also pass in smaller components as a selector. In this case we use "selectCartItems" instead of "selectCart"
-export const selectCartItemsCount = createSelector(
-    [selectCartItems],
-    cartItems => cartItems.reduce((accumulatedQuantity, item) => accumulatedQuantity + item.quantity, 0)
+export const selectCurrentUser = createSelector(
+    [selectUser],
+    userReducer => userReducer.currentUser
 )
 
 

@@ -17,6 +17,11 @@ import { auth, createUserProfileDocument } from './firebase/firebase.util';
 import { connect } from 'react-redux';
 import { setCurrentUser } from "./redux/user/user.actions";
 
+//Import redux selectors
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "./redux/user/user.selectors";
+
+
 // const HatsPage = () => (
 //     <div>
 //         HATS PAGE
@@ -130,9 +135,22 @@ class App extends React.Component {
 
 //For the redirect of logged in user not being abel to use the sign in page, we need the current user from our global state -> props
 //We destructure the globalState = { userReducer, reducerName2 ...}
-const mapStateToProps = ({ userReducer }) => ({
-    currentUser: userReducer.currentUser,
-})
+// const mapStateToProps = ({ userReducer }) => ({
+//     currentUser: userReducer.currentUser,
+// }
+//IMPORTANT: We build a selector because the whole page is being renders when we hide cart or call current user
+//We change ({ userReducer }) to "state", så we now look at a memorized state
+// const mapStateToProps = state => ({
+//     //We call the selector in the "state", and pass in the state, so in goes through all the selectors
+//     currentUser: selectCurrentUser(state), //NOW we only render the currentUser
+//     cartHidden: selectCartHidden(state) //NOW we only render the cartHidden
+// });
+//WE CAN STRUCTURE OUR STATEMENT WITH "createStructuredSelector" SO THE STATE AUTOMATICALLY IS PASSED IN
+//We can use createStructuredSelector when we have multiple states to change
+const mapStateToProps = createStructuredSelector({
+    //We call the selector in the "state", and pass in the state, so in goes through all the selectors
+    currentUser: selectCurrentUser, //NOW we only render the currentUser
+});
 
 
 

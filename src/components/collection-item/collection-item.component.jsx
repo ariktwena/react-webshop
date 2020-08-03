@@ -34,11 +34,6 @@ const CollectionItem = ({ item, addItemToCart }) => {
     )
 }
 
-// //ADVANCED WAY of destructuring the globalState
-// const mapStateToProps = ({ cartReducer: { cartItems } }) => ({
-//     cartItems
-// });
-
 //We add the state from the global state, that is used to render
 const mapDispatchToProps = dispatch => ({
     //We are dispatching the user object into the addItemCart function

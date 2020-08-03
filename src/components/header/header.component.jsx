@@ -20,6 +20,11 @@ import CartIcon from "../cart-icon/cart-icon.component";
 //Cart dropdown component
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
+//Redux selectors
+import { createStructuredSelector } from "reselect";
+import {selectCartHidden} from "../../redux/cart/cart.selectors";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
+
 
 const Header = ({ currentUser, cartHidden }) => (
     <div className='header'>
@@ -62,15 +67,30 @@ const Header = ({ currentUser, cartHidden }) => (
 
 //We check our global state in our rootReducer, and look for the state of our currentUser in our userReducer
 //We take the state in the global state, at pass them trough as props
-const mapStateToProps = globalState => ({
-    currentUser: globalState.userReducer.currentUser,
-    cartHidden: globalState.cartReducer.cartHidden
-});
+// const mapStateToProps = globalState => ({
+//     currentUser: globalState.userReducer.currentUser,
+//     cartHidden: globalState.cartReducer.cartHidden
+// });
 //ADVANCED WAY of destructuring the globalState
 // const mapStateToProps = ({ userReducer: { currentUser }, cartReducer: { cartHidden } }) => ({
 //     currentUser,
 //     cartHidden
 // });
+//IMPORTANT: We build a selector because the whole page is being renders when we hide cart or call current user
+//We change ({ userReducer: { currentUser }, cartReducer: { cartHidden } }) to "state", så we now look at a memorized state
+// const mapStateToProps = state => ({
+//     //We call the selector in the "state", and pass in the state, so in goes through all the selectors
+//     currentUser: selectCurrentUser(state), //NOW we only render the currentUser
+//     cartHidden: selectCartHidden(state) //NOW we only render the cartHidden
+// });
+//WE CAN STRUCTURE OUR STATEMENT WITH "createStructuredSelector" SO THE STATE AUTOMATICALLY IS PASSED IN
+//We can use createStructuredSelector when we have multiple states to change
+const mapStateToProps = createStructuredSelector({
+    //We call the selector in the "state", and pass in the state, so in goes through all the selectors
+    currentUser: selectCurrentUser, //NOW we only render the currentUser
+    cartHidden: selectCartHidden //NOW we only render the cartHidden
+});
+
 
 //We export the Header component using the currentUser and cartHidden from the global state
 export default connect(mapStateToProps)(Header);
