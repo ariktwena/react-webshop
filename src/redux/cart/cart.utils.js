@@ -27,3 +27,26 @@ export const addItemToCartFunction = (cartItems, cartItemToAdd) => {
 
 }
 
+//Subtract 1 from quantity
+export const subtractItemFromCartFunction = (cartItems, cartItemToRemove) => {
+
+    return cartItems.map(cartItem =>
+        //If they mach like before
+        cartItem.id === cartItemToRemove.id
+            //We check if the quantity is 1
+            ? cartItem === 1
+                ? cartItems.remove(cartItem)
+                : { ...cartItem, quantity: cartItem.quantity - 1 }
+            //We subtract 1 from the quantity
+            : { ...cartItem, quantity: cartItem.quantity - 1 }
+    )
+}
+
+//Remove item from cart
+export const removeItemFromCartFunction = (cartItems, cartItemToRemove) => {
+
+    //We check if the to id's DON'T match, and return true if they DON't match (we keep the item in the array)
+    return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id)
+}
+
+
