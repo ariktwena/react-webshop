@@ -9,6 +9,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./shop/shop.component";
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckOut from "./pages/checkout/checkout.component";
 
 //Import users from Google
 import { auth, createUserProfileDocument } from './firebase/firebase.util';
@@ -124,6 +125,7 @@ class App extends React.Component {
                         ? (<Redirect to='/' />)
                         : (<SignInAndSignUpPage />)
                     }/>
+                    <Route exact path='/checkout' component={CheckOut}/>
                     {/*<Route path='/shop/hats' component={HatsPage}/>*/}
                 </Switch>
             </div>
