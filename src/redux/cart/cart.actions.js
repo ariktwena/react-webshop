@@ -8,6 +8,7 @@ export const toggleCartHidden = () => ({
 
 export const addItemToCart = (item) => ({
     type: CartActionTypes.ADD_TO_CART,
+    //Payload is what we want to change og compare to. The "load" we give to the reducer
     payload: item
 })
 

@@ -6,17 +6,12 @@ import './checkout-item.styles.scss';
 import {connect} from "react-redux";
 
 //Import redux actions
-import { clearItemFromCart } from '../../redux/cart/cart.actions';
-
-//Import redux selector
-import { createStructuredSelector } from "reselect";
-import {selectCartItems} from "../../redux/cart/cart.selectors";
-import {addItemToCart} from "../../redux/cart/cart.actions";
+import { clearItemFromCart, addItemToCart, removeItemFromCart } from '../../redux/cart/cart.actions';
 
 //Destructure cartItem this way, because we also need to whole cartItem to remove items from the cartItems array
-const CheckoutItem = ({cartItem, clearItem}) => {
+const CheckoutItem = ({cartItem, clearItem, addItem, removeItem}) => {
 
-    const {name, imageUrl, price, quantity, id} = cartItem;
+    const { name, imageUrl, price, quantity } = cartItem;
 
     return (
         <div className='checkout-item'>
@@ -25,7 +20,11 @@ const CheckoutItem = ({cartItem, clearItem}) => {
             </div>
 
             <span className='name'>{name}</span>
-            <span className='quantity'>{quantity}</span>
+            <span className='quantity'>
+                <div className='arrow' onClick={() => removeItem(cartItem)}>&#10094;</div>
+                <span className='value'>{quantity}</span>
+                <div className='arrow' onClick={() => addItem(cartItem)}>&#10095;</div>
+            </span>
             <span className='price'>{price}</span>
 
             <div className='remove-button' onClick={() => clearItem(cartItem)}>
@@ -40,7 +39,9 @@ const CheckoutItem = ({cartItem, clearItem}) => {
 //We add the state from the global state, that is used to render
 const mapDispatchToProps = dispatch => ({
     //We are dispatching the user object into the addItemCart function
-    clearItem: cartItem => dispatch(clearItemFromCart(cartItem))
+    clearItem: cartItem => dispatch(clearItemFromCart(cartItem)),
+    addItem: cartItem => dispatch(addItemToCart(cartItem)),
+    removeItem: cartItem => dispatch(removeItemFromCart(cartItem)),
 });
 
 //We dont pass in a value for cartItem to begin with. Therefor its null

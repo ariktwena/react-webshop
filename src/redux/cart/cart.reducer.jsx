@@ -46,7 +46,7 @@ const cartReducer = (currentState = INITIAL_STATE, action) => {
                 //We want to add an item to our array, so first we pass in the existing array og cartItems (...currentState.cartItems)
                 //Then we pass in a new item in the END of that array from the payload (, action.payload)
                 //cartItems: [...currentState.cartItems, action.payload]
-                //Our new function where we add cartItems to an Array, where we check for matching cartItems and recrease quantity
+                //Our new function where we add cartItems to an Array, where we check for matching cartItems and decrease quantity
                 cartItems: subtractItemFromCartFunction(currentState.cartItems, action.payload)
             };
         //When the action.type = CLEAR_ITEM_FROM_CART
