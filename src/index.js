@@ -6,7 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 
 //Redux components
 import { Provider } from 'react-redux';
-import store from "./redux/store";
+import { store } from "./redux/store";
+
+//Import persistGate and persistor from redux-persist and store
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from "./redux/store";
 
 
 import './index.css';
@@ -17,7 +21,9 @@ ReactDOM.render(
     <Provider store={store}>
         {/*We give our website all the functionalities of routing*/}
         <BrowserRouter>
-            <App />
+            <PersistGate persistor={persistor} >
+                <App />
+            </PersistGate>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
