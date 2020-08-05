@@ -6,75 +6,108 @@ import './directory.styles.scss';
 //Import MenuItem
 import MenuItem from "../menu-item/menu-item.component";
 
+//Import higher component for redux
+import { connect } from 'react-redux';
+
+//Redux selectors
+import { createStructuredSelector } from "reselect";
+import { selectDirectorySections } from '../../redux/directory/directory.selectors'
+
+
+//**** BEFORE GLOBAL REDUCER ***************************
 //Import fake shopping data
-import SECTIONS_DATA from "../../shopping_data/sections.data";
+// import SECTIONS_DATA from "../../shopping_data/sections.data";
+// We make a class component because we need to create a state
+// class Directory extends Component {
+//     constructor(props) {
+//         super(props);
+//
+//         //We set our state value
+//         this.state = {
+//             sections: SECTIONS_DATA,
+//             // sections: [
+//             //     {
+//             //         title: 'hats',
+//             //         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+//             //         size: '',
+//             //         id: 1,
+//             //         linkUrl: 'shop/hats'
+//             //     },
+//             //     {
+//             //         title: 'jackets',
+//             //         imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+//             //         size: '',
+//             //         id: 2,
+//             //         linkUrl: 'shop/jackets'
+//             //     },
+//             //     {
+//             //         title: 'sneakers',
+//             //         imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+//             //         size: '',
+//             //         id: 3,
+//             //         linkUrl: 'shop/sneakers'
+//             //     },
+//             //     {
+//             //         title: 'womens',
+//             //         imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+//             //         //We give this object a size, so we can style it, if the class has the "large" class
+//             //         size: 'large',
+//             //         id: 4,
+//             //         linkUrl: 'shop/womens'
+//             //     },
+//             //     {
+//             //         title: 'mens',
+//             //         imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+//             //         size: 'large',
+//             //         id: 5,
+//             //         linkUrl: 'shop/mens'
+//             //     }
+//             // ]
+//         }
+//
+//     }
+//
+//     render() {
+//         return (
+//             <div className='directory-menu'>
+//                 {/*We loop trough our sections in the state, and generate a new "MenuItem" for every section in the sections array*/}
+//                 {/*We destructure the "currentElement" => currentElement = { title, imageUrl, id }*/}
+//                 {
+//                     //We use ...otherSectionProps to auto fill the values for the props with the exact props name
+//                     this.state.sections.map( ({ id, ...otherSectionProps}) => (
+//                         <MenuItem key={id} {...otherSectionProps}/>))
+//                     //This is how we write it in the old way
+//                     // this.state.sections.map( ({ title, imageUrl, id, size, linkUrl }) => (
+//                     //     <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} linkUrl={linkUrl}/>))
+//                 }
+//             </div>
+//         )
+//     }
+// }
 
-//We make a class component because we need to create a state
-class Directory extends Component {
-    constructor(props) {
-        super(props);
 
-        //We set our state value
-        this.state = {
-            sections: SECTIONS_DATA,
-            // sections: [
-            //     {
-            //         title: 'hats',
-            //         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-            //         size: '',
-            //         id: 1,
-            //         linkUrl: 'shop/hats'
-            //     },
-            //     {
-            //         title: 'jackets',
-            //         imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-            //         size: '',
-            //         id: 2,
-            //         linkUrl: 'shop/jackets'
-            //     },
-            //     {
-            //         title: 'sneakers',
-            //         imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-            //         size: '',
-            //         id: 3,
-            //         linkUrl: 'shop/sneakers'
-            //     },
-            //     {
-            //         title: 'womens',
-            //         imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-            //         //We give this object a size, so we can style it, if the class has the "large" class
-            //         size: 'large',
-            //         id: 4,
-            //         linkUrl: 'shop/womens'
-            //     },
-            //     {
-            //         title: 'mens',
-            //         imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-            //         size: 'large',
-            //         id: 5,
-            //         linkUrl: 'shop/mens'
-            //     }
-            // ]
-        }
+//**** AFTER GLOBAL REDUCER ***************************
+const Directory = ({ sections }) =>
+     (
+        <div className='directory-menu'>
+            {/*We loop trough our sections in the state, and generate a new "MenuItem" for every section in the sections array*/}
+            {/*We destructure the "currentElement" => currentElement = { title, imageUrl, id }*/}
+            {
+                //We use ...otherSectionProps to auto fill the values for the props with the exact props name
+                sections.map( ({ id, ...otherSectionProps}) => (
+                    <MenuItem key={id} {...otherSectionProps}/>))
+                //This is how we write it in the old way
+                // this.state.sections.map( ({ title, imageUrl, id, size, linkUrl }) => (
+                //     <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} linkUrl={linkUrl}/>))
+            }
+        </div>
+     )
 
-    }
 
-    render() {
-        return (
-            <div className='directory-menu'>
-                {/*We loop trough our sections in the state, and generate a new "MenuItem" for every section in the sections array*/}
-                {/*We destructure the "currentElement" => currentElement = { title, imageUrl, id }*/}
-                {
-                    //We use ...otherSectionProps to auto fill the values for the props with the exact props name
-                    this.state.sections.map( ({ id, ...otherSectionProps}) => (
-                        <MenuItem key={id} {...otherSectionProps}/>))
-                    //This is how we write it in the old way
-                    // this.state.sections.map( ({ title, imageUrl, id, size, linkUrl }) => (
-                    //     <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} linkUrl={linkUrl}/>))
-                }
-            </div>
-        )
-    }
-}
+//ADVANCED WAY of destructuring the globalState
+const mapStateToProps = createStructuredSelector({
+    sections: selectDirectorySections,
+});
 
-export default Directory;
+// export default Directory;
+export default connect(mapStateToProps)(Directory);

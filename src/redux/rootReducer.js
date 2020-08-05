@@ -6,6 +6,8 @@ import { combineReducers } from "redux";
 //All the children reducers we import
 import userReducer from "./user/user.reducer";
 import cartReducer from "./cart/cart.reducer";
+import directoryReducer from "./directory/directory.reducer";
+import shopReducer from "./shop/shop.reducer";
 
 //Import persistReducer from redux-persist
 import { persistReducer } from "redux-persist";
@@ -32,6 +34,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     userReducer: userReducer,
     cartReducer: cartReducer,
+    directoryReducer: directoryReducer,
+    shopReducer: shopReducer,
 });
 
 //We export the rootReducer via the persistReducer with the persistConfig
