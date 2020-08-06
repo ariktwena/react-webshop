@@ -2,9 +2,12 @@ import React from "react";
 
 import './shop.styles.scss';
 
+import { Route } from 'react-router';
+
 //Import collection-preview component
 import CollectionPreview from "../components/collection-preview/collection-preview.component";
 import CollectionsOverview from "../components/collections-overview/collections-overview.component";
+import CollectionPage from "../pages/collection/collection.component";
 
 //Import higher component for redux
 import { connect } from 'react-redux';
@@ -60,12 +63,22 @@ import SHOP_DATA from "../shopping_data/shop.data";
 //         )
 
 //***** After making a Collections-overview
-const ShopPage = () => (
-    <div>
-        {/*We make nested routing depending on the page/category we want to view */}
-        <CollectionsOverview />
-    </div>
-)
+//match, location and history is automatically being passed in from the Route in the App.js file
+const ShopPage = ({ match }) => {
+
+    //Display match.path in the console
+    console.log(match);
+    console.log(match.path);
+
+    return (
+        <div>
+            {/*We make nested routing depending on the page/collection we want to view */}
+            <Route exact path={`${match.path}`} component={CollectionsOverview}/>
+            {/*We want to route to the categories, and by using ":categoryId" we now have it as a parameter in the CategoryPage component*/}
+            <Route path={`${match.path}/:collectionId`} component={CollectionPage}/>
+        </div>
+    )
+}
 
 
 

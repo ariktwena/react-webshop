@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 //Redux selectors
 import { createStructuredSelector } from "reselect";
-import { selectShopCollections } from '../../redux/shop/shop.selectors';
+import { selectShopCollections, selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 
 
 const CollectionsOverview = ({ collections }) => (
@@ -25,7 +25,10 @@ const CollectionsOverview = ({ collections }) => (
 
 //ADVANCED WAY of destructuring the globalState
 const mapStateToProps = createStructuredSelector({
-    collections: selectShopCollections,
+    //This selector was build for an array but now gets a normalized object, so its not working
+    // collections: selectShopCollections,
+    //This selector converts the object selector (selectShopCollections) to an array
+    collections: selectCollectionsForPreview,
 });
 
 export default connect(mapStateToProps)(CollectionsOverview);
